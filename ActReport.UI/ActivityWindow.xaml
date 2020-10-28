@@ -8,16 +8,18 @@
         Title="Tätigkeiten" Height="300" Width="600">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
         <StackPanel Grid.Row="0" Orientation="Vertical">
             <TextBlock>Tätigkeiten des Mitarbeiters</TextBlock>
             <TextBlock Foreground="DarkGreen" Text="{Binding FullName}"></TextBlock>
         </StackPanel>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Activities}" AutoGenerateColumns="False">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Activities}" AutoGenerateColumns="False" IsReadOnly="true">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Datum" MinWidth="110">
+                <DataGridTemplateColumn Header="Datum" MinWidth="110" IsReadOnly="true">
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <DatePicker SelectedDate="{Binding Path=Date, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
@@ -30,12 +32,16 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Von" MinWidth="60" Binding="{Binding Path=StartTime,
-                    StringFormat=HH:mm, UpdateSourceTrigger=LostFocus}"/>
+                    StringFormat=HH:mm, UpdateSourceTrigger=LostFocus}" IsReadOnly="true"/>
                 <DataGridTextColumn Header="Bis" MinWidth="60" Binding="{Binding Path=EndTime,
-                    StringFormat=HH:mm, UpdateSourceTrigger=LostFocus}"></DataGridTextColumn>
+                    StringFormat=HH:mm, UpdateSourceTrigger=LostFocus}" IsReadOnly="true"></DataGridTextColumn>
                 <DataGridTextColumn Header="Tätigkeit" MinWidth="200" Binding="{Binding Path=ActivityText,
-                    UpdateSourceTrigger=LostFocus}"></DataGridTextColumn>
+                    UpdateSourceTrigger=LostFocus}" IsReadOnly="true"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Height="30" Grid.Row="3"  Command="{Binding CmdNewEmployee}" Margin="5,122,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">Neue Tätigkeit hinzufügen</Button>
+        <Button Height="30" Grid.Row="2"  Command="{Binding CmdNewEmployee}" Margin="155,122,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">Tätigkeit bearbeiten</Button>
+        <Button Height="30" Grid.Row="2"  Command="{Binding CmdNewEmployee}" Margin="270,122,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">Tätigkeit löschen</Button>
+
     </Grid>
 </Window>
