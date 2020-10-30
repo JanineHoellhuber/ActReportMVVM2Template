@@ -6,8 +6,14 @@ using System.Text;
 
 namespace ActReport.UI
 {
-    class MainController :IController
+    class MainController : IController
     {
+        private Dictionary<BaseViewModel, Window> _windows;
+
+        public MainController()
+        {
+            _windows = new Dictionary<BaseViewModel, Window>();
+        }
         public void ShowWindow(BaseViewModel viewModel)
         {
             Window window = viewModel switch
@@ -20,10 +26,19 @@ namespace ActReport.UI
 
                 _ => throw new InvalidOperationException($"Unkonwn ViewModel of type '{viewModel}'"),
             };
-
+            _windows[viewModel] = window;
             window.DataContext = viewModel;
 
             window.ShowDialog();
+        }
+
+        public void CloseWindow(BaseViewModel viewModel)
+        {
+            if(_windows.ContainsKey(viewModel))
+            {
+                _windows[viewModel].Close();
+                _windows.Remove(viewModel);
+            }
         }
     }
 }

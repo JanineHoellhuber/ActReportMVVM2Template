@@ -108,7 +108,7 @@ namespace ActReport.ViewModel
                           _activity.StartTime = StartTime;
                           _activity.EndTime = EndTime;
                           _activity.ActivityText = ActivityText;
-                          uow.ActivityRepository.Update(_activity);
+                          uow.ActivityRepository.Insert(_activity);
                           uow.Save();
 
                       },
@@ -124,7 +124,7 @@ namespace ActReport.ViewModel
                          _activity.StartTime = StartTime;
                          _activity.EndTime = EndTime;
                          _activity.ActivityText = ActivityText;
-                         uow.ActivityRepository.Insert(_activity);
+                         uow.ActivityRepository.Update(_activity);
                          uow.Save();
 
                      },

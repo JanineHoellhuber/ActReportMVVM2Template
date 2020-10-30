@@ -68,7 +68,18 @@ namespace ActReport.ViewModel
             }
         }
 
-       public ICommand CmdActivity
+        private void LoadActivities()
+        {
+            using IUnitOfWork uow = new UnitOfWork();
+            Activities = new ObservableCollection<Activity>(uow.ActivityRepository.Get(
+                filter: x => x.Employee_Id == _employee.Id,
+                orderBy: coll => coll.OrderBy(activity => activity.Date).ThenBy(activity => activity.StartTime)));
+
+            Activities.CollectionChanged += Activities_CollectionChanged;
+
+        }
+
+        public ICommand CmdActivity
         {
             get
             {
@@ -77,6 +88,7 @@ namespace ActReport.ViewModel
                     _cmdActivity = new RelayCommand(
                        execute: _ => _controller.ShowWindow(new ActivityNewAndEditModel(_controller, SelectedActivity, _employee)),
                        canExecute: _ => true);
+                    LoadActivities();
                 }
                 return _cmdActivity;
             }
@@ -95,6 +107,7 @@ namespace ActReport.ViewModel
 
                            uow.ActivityRepository.Delete(SelectedActivity);
                            uow.Save();
+                           LoadActivities();
                        },
                 canExecute: _ => true && _cmdDeleteActivity != null);
                 }
