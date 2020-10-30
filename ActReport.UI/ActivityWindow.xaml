@@ -17,7 +17,7 @@
             <TextBlock>Tätigkeiten des Mitarbeiters</TextBlock>
             <TextBlock Foreground="DarkGreen" Text="{Binding FullName}"></TextBlock>
         </StackPanel>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Activities}" AutoGenerateColumns="False" IsReadOnly="true">
+        <DataGrid Grid.Row="1" SelectedItem="{Binding SelectedActivity}" ItemsSource="{Binding Activities}" AutoGenerateColumns="False" IsReadOnly="true">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Datum" MinWidth="110" IsReadOnly="true">
                     <DataGridTemplateColumn.CellEditingTemplate>
@@ -39,9 +39,9 @@
                     UpdateSourceTrigger=LostFocus}" IsReadOnly="true"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Height="30" Grid.Row="3"  Command="{Binding CmdNewEmployee}" Margin="5,122,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">Neue Tätigkeit hinzufügen</Button>
-        <Button Height="30" Grid.Row="2"  Command="{Binding CmdNewEmployee}" Margin="155,122,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">Tätigkeit bearbeiten</Button>
-        <Button Height="30" Grid.Row="2"  Command="{Binding CmdNewEmployee}" Margin="270,122,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">Tätigkeit löschen</Button>
+        <Button Height="30" Grid.Row="3"  Command="{Binding CmdActivity}" Margin="5,122,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom">Neue Tätigkeit hinzufügen</Button>
+        <Button Height="30" Grid.Row="2"  Command="{Binding CmdActivity}" Margin="155,122,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom">Tätigkeit bearbeiten</Button>
+        <Button Height="30" Grid.Row="2"  Command="{Binding CmdDeleteActivity}" Margin="270,122,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom">Tätigkeit löschen</Button>
 
     </Grid>
 </Window>

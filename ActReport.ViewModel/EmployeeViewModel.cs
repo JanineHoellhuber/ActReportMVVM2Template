@@ -14,8 +14,9 @@ namespace ActReport.ViewModel
     private string _lastName;  // Eingabefeld Nachname
     private Employee _selectedEmployee; // Aktuell ausgewählter Mitarbeiter
     private ObservableCollection<Employee> _employees; // Liste aller Mitarbeiter
-    private ICommand _cmdEditActivites; 
-    public string FirstName
+    private ICommand _cmdEditActivites;
+
+        public string FirstName
     {
       get => _firstName;
       set
@@ -100,10 +101,10 @@ namespace ActReport.ViewModel
     }
 
     public ICommand CmdEditActivites
-    {
+        {
             get
             {
-                if(_cmdEditActivites == null)
+                if (_cmdEditActivites == null)
                 {
                     _cmdEditActivites = new RelayCommand(
                        execute: _ => _controller.ShowWindow(new ActivityViewModel(_controller, SelectedEmployee)),
@@ -111,6 +112,8 @@ namespace ActReport.ViewModel
                 }
                 return _cmdEditActivites;
             }
+        }
+    
+     
     }
-  }
 }

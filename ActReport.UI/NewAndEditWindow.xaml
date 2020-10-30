@@ -1,0 +1,51 @@
+﻿<Window x:Class="ActReport.UI.NewAndEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ActReport.UI"
+        mc:Ignorable="d"
+        Title="NewAndEditWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Margin="0,10,0,20"  HorizontalAlignment="Center" >Neue Tätigkeit anlegen oder bearbeiten</TextBlock>
+
+        <Grid Name="grdCdFields" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0">Datum</Label>
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Date}"></TextBox>
+
+            <Label Grid.Column="0" Grid.Row="1">Startzeit</Label>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=StartTime}"></TextBox>
+
+            <Label Grid.Column="0" Grid.Row="2">Endzeit</Label>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=EndTime}"></TextBox>
+
+            <Label Grid.Column="0" Grid.Row="3">Tätigkeit</Label>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=ActivityText}"></TextBox>
+
+        </Grid>
+
+        <UniformGrid Grid.Row="2" Rows="1">
+            <Button Content="Save" Command="{Binding CmdActivites}" Margin="10,10,5,10"/>
+        </UniformGrid>
+    </Grid>
+</Window>

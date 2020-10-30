@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 
 namespace ActReport.ViewModel
 {
@@ -14,7 +15,21 @@ namespace ActReport.ViewModel
     {
         private Employee _employee;
         private ObservableCollection<Activity> _activities;
+        private ICommand _cmdActivity;
+        private Activity _selectedActivity;
+        private ICommand _cmdDeleteActivity;
 
+
+
+        public Activity SelectedActivity
+        {
+            get => _selectedActivity;
+            set
+            {
+                _selectedActivity = value;
+                OnPropertyChanged(nameof(SelectedActivity));
+            }
+        }
         public ObservableCollection<Activity> Activities
         {
             get => _activities;
@@ -52,6 +67,40 @@ namespace ActReport.ViewModel
                 }
             }
         }
+
+       public ICommand CmdActivity
+        {
+            get
+            {
+                if (_cmdActivity == null)
+                {
+                    _cmdActivity = new RelayCommand(
+                       execute: _ => _controller.ShowWindow(new ActivityNewAndEditModel(_controller, SelectedActivity, _employee)),
+                       canExecute: _ => true);
+                }
+                return _cmdActivity;
+            }
+            
+        }
+        public ICommand CmdDeleteActivity
+        {
+            get
+            {
+                if (_cmdDeleteActivity == null)
+                {
+                    _cmdDeleteActivity = new RelayCommand(
+                       execute: _ =>
+                       {
+                           using IUnitOfWork uow = new UnitOfWork();
+
+                           uow.ActivityRepository.Delete(SelectedActivity);
+                           uow.Save();
+                       },
+                canExecute: _ => true && _cmdDeleteActivity != null);
+                }
+                return _cmdDeleteActivity;
+            }
+        }
+        }
     }
-}
  
