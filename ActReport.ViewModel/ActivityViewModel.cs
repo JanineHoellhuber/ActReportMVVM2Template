@@ -45,12 +45,7 @@ namespace ActReport.ViewModel
         public ActivityViewModel(IController controller, Employee employee) : base(controller)
         {
             _employee = employee;
-            using IUnitOfWork uow = new UnitOfWork();
-            Activities = new ObservableCollection<Activity>(uow.ActivityRepository.Get(
-                filter: x => x.Employee_Id == employee.Id,
-                orderBy: coll => coll.OrderBy(activity => activity.Date).ThenBy(activity => activity.StartTime)));
-
-            Activities.CollectionChanged += Activities_CollectionChanged;
+            LoadActivities();
         }
 
         private void Activities_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -86,9 +81,9 @@ namespace ActReport.ViewModel
                 if (_cmdActivity == null)
                 {
                     _cmdActivity = new RelayCommand(
-                       execute: _ => _controller.ShowWindow(new ActivityNewAndEditModel(_controller, SelectedActivity, _employee)),
+                       execute: _ => _controller.ShowWindow(new ActivityNewAndEditModel(_controller, SelectedActivity, _employee)), 
                        canExecute: _ => true);
-                    LoadActivities();
+                   
                 }
                 return _cmdActivity;
             }

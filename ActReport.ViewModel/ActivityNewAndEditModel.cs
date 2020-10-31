@@ -18,6 +18,7 @@ namespace ActReport.ViewModel
         private Boolean insert;
         private Employee _employeeId;
 
+
         public Activity Activity
         {
             get => _activity;
@@ -110,6 +111,7 @@ namespace ActReport.ViewModel
                           _activity.ActivityText = ActivityText;
                           uow.ActivityRepository.Insert(_activity);
                           uow.Save();
+                          _controller.CloseWindow(this);
 
                       },
                       canExecute: _ => _activity != null);
@@ -126,6 +128,8 @@ namespace ActReport.ViewModel
                          _activity.ActivityText = ActivityText;
                          uow.ActivityRepository.Update(_activity);
                          uow.Save();
+                         _controller.CloseWindow(this);
+
 
                      },
                      canExecute: _ => _activity != null);
