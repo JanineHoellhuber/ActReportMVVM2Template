@@ -46,6 +46,7 @@
 
         <UniformGrid Grid.Row="2" Rows="1">
             <Button Content="Save" Height="20" Command="{Binding CmdNewAndEditActivites}" Margin="10,10,5,10"/>
+            <Button Content="Cancel" Height="20" Command="{Binding CmdCancel}" Margin="10,10,5,10"/>
         </UniformGrid>
     </Grid>
 </Window>

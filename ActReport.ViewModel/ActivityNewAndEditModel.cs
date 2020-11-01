@@ -139,6 +139,28 @@ namespace ActReport.ViewModel
             set { _cmdActivites = value; }
         }
 
+        private ICommand _cmdCancel;
+
+        public ICommand CmdCancel
+        {
+            get
+            {
+                if (_cmdCancel == null )
+                {
+                    _cmdCancel = new RelayCommand(
+                      execute: _ =>
+                      {
+                        
+                          _controller.CloseWindow(this);
+
+                      },
+                      canExecute: _ => true);
+            
+                }
+                return _cmdCancel;
+            }
+        
+        }
 
     }
 }
